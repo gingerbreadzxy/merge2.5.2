@@ -172,13 +172,15 @@ class MergeOptimizer:
 
         for veh in sequence_copy:
             if veh.get('id') == ramp_id:
+                veh['planned_join'] = True
                 veh['planned_join_platoon_id'] = platoon_id
                 updated = True
                 break
 
         if not updated:
             ramp_clone = copy.deepcopy(ramp_vehicle)
-            ramp_clone['planned_join_planned_id'] = platoon_id
+            ramp_clone['planned_join'] = True
+            ramp_clone['planned_join_platoon_id'] = platoon_id
             sequence_copy.append(ramp_clone)
 
         return sequence_copy, platoon_id
